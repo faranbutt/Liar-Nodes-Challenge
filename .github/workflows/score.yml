@@ -20,6 +20,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r starter_code/requirements.txt pandas scikit-learn
 
+      # ✅ Write the secret to a file
+      - name: Create hidden test labels
+        run: echo "${{ secrets.TESTREAL }}" > data/test_labels.csv
+
       - name: Run scoring
         run: python scoring_script.py submissions/*.csv
 
