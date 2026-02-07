@@ -115,6 +115,9 @@ Adversarial Training for Graph Neural Networks: Pitfalls, Solutions, and New Dir
 
 The Reason Why Cancer is so Hard to Beat -Kurzgesagt – In a Nutshell
 
+A Multimodal Graph Neural Network Framework of Cancer Molecular Subtype Classification
+
+
 ---
 PS: the code used to create the challenge dataset is defined in challenge_data notebook , as a participants please ignore it.
 
