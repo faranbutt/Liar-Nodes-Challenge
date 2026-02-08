@@ -6,18 +6,24 @@ For most neural networks, classification tasks are made individually based on th
 
 **Graph Neural Networks (GNNs)** fundamentally alter this paradigm by performing **collective decision making**. Rather than relying solely on the representation (embedding) of an individual node, the classification decision is influenced by the structure of the graph and by aggregated information from neighboring nodes.
 
+We apply this concept in Cancer biology! A cell's environment can give misleading cues — e.g., a malignant cell might “look normal” in isolation, or neighboring immune cells might influence its signaling,the node’s own features (gene expression) might conflict with neighborhood information (similar cells in the microenvironment), mimicking real biological “contradictions.”
+
 ### 💡 The Core Question
 
-**This raises an important question: what should a model do when there is a contradiction between the information provided by a node's embedding and the information coming from its neighborhood?**
+**This raises an important question: what should a model do when there is a contradiction between the information provided by a node's embedding and the information coming from its neighborhood? AKA adversary learning**
 
 ---
 ![Alt text](picture.png)
 
 ## 🎮 Challenge Overview
 
-In this challenge, the goal is to implement mechanisms that balance these two sources of information. Node features are manually corrupted, while graph connectivity encodes contextual relationships that may either reinforce or contradict a node's individual features.
+In this challenge, the goal is to implement mechanisms that balance these two sources of information that might contradict each other. Node features are manually corrupted, while graph connectivity encodes contextual relationships that may either reinforce or contradict a node's individual features.
 
-Participants must adapt GNN models using techniques such as **neighborhood sampling** and **aggregation** to learn when to trust the node embedding, when to trust the neighborhood, and how to effectively combine both in order to perform node classification on the given dataset.
+We apply this concept in Cancer biology! A cell's environment can give misleading cues — e.g., a malignant cell might “look normal” in isolation, or neighboring immune cells might influence its signaling,the node’s own features (gene expression) might conflict with neighborhood information (similar cells in the microenvironment), mimicking real biological “contradictions.”
+
+Participants must adapt GNN models using techniques such as **neighborhood sampling** and **aggregation** to learn when to trust the node embedding, when to trust the neighborhood, and how to effectively combine both in order to perform node classification and detect the cancerous cells.
+
+
 
 ###  Critical Constraint
 
@@ -29,21 +35,24 @@ Participants must adapt GNN models using techniques such as **neighborhood sampl
 
 > **This challenge is not about inventing a new GNN, it is about choosing the right way to listen.**
 > 
-> You can't tell who is giving you the corrupted information and lying to you—you must be smart with your information collecting!
+> You can’t tell which cells are sending corrupted signals , you must be clever about how you gather and trust information from the tumor microenvironment!
 
 ---
 
 ##  What Data You Will Use
 
-As most regular GNN training tasks, you will be given:
+The Cancer Single-cell Expression Map (CancerSCEM) dataset provides comprehensive single-cell RNA-seq data across multiple cancer types. Instead of raw sequencing reads, the dataset offers UMI count matrices in standard .tsv format for downstream analysis. Each dataset includes:
+Gene Expression Matrices per cell  enabling gene descriptio/Cell-Type Annotations and Components /Functional Molecules /Cell-Cell Interaction Data .
+You can read more about this data source on https://ngdc.cncb.ac.cn/cancerscem/index .
+As for this task, we have altered samples from this data to present it for a  GNN training tasks, you will be given:
 
 ### 🔗 **A (Adjacency Matrix)**
 - **Absolute truth** ✓
 - Contains information about the connections and structure of your input graph
-- This is your reliable source
+- This is your reliable source for understanding interractions between the cells , you are encouraged to read about cancer cells behavior for a better solution!
 
 ### 📈 **X (Node Embeddings)**
-- Embeddings of nodes
+- Embeddings of nodes == Genes encodings
 - ⚠️ **Some nodes have been corrupted to trick you!**
 - You cannot modify these embeddings
 
@@ -53,9 +62,11 @@ As most regular GNN training tasks, you will be given:
 - **NOT available in `test.csv`** (this is what you need to test on)
 
 ### 📁 **Data Files**
-- **`train.csv`** - Contains features, labels, AND corruption mask
+- **`train1.csv`** - Contains features AND corruption mask(part1)
+- **`train2.csv`** - Contains features AND corruption mask(part2)
 - **`test.csv`** - Contains features only (no labels, no mask)
-
+- **`train_labels.csv`** - Contains labels for the full training data
+  For dimentions issues we split the training data features in two , you would find additional code to help you import the data as a dataframe.
 ---
 
 ##  Example Techniques
@@ -79,7 +90,7 @@ You can use the same GNN as your baseline model , same for the training loop , g
 - Design custom aggregation functions
 - Use attention mechanisms
 - Combine multiple GNN layers strategically
-
+- Look up additional resources to understand the bahavior of the cancerous cells.
 ---
 
 ##  Your Mission ✨✨
@@ -88,8 +99,7 @@ Build a GNN that can navigate the noise and make accurate predictions by:
 
 1. **Learning when to trust** individual node features
 2. **Learning when to trust** neighborhood aggregation
-3. **Balancing both sources** intelligently to maximize classification accuracy
-
+3. **Build** robust GNNs can detect anomalies or corrupted signals — similar to spotting a misbehaving cell in a tumor.
 ## Evaluation Metrics
 Your submissions will be evaluated on the test set using three metrics:
 
@@ -117,6 +127,9 @@ The Reason Why Cancer is so Hard to Beat -Kurzgesagt – In a Nutshell
 
 A Multimodal Graph Neural Network Framework of Cancer Molecular Subtype Classification
 
+Cancer Single-cell Expression Map
+
+Graph Neural Networks in Cancer and Oncology Research: Emerging and Future Trends Grigoriy Gogoshin 1,*, Andrei S Rodin 1,
 
 ---
 PS: the code used to create the challenge dataset is defined in challenge_data notebook , as a participants please ignore it.
