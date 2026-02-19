@@ -104,11 +104,14 @@ The winner will be determined by the submission that achieves the best classific
 ###  Submission Process
 
 1. Fork this repository
-2. Add your predictions: `submissions/submission_<username>.csv`
+2. Add your predictions: `submissions/submission_<username>.csv`  (create the submissions folder and put your csv file in it)
 3. Create Pull Request:
    *Base : Main
+   
    *Name Submission: <your_username>
+   
    *Compare: your fork/branch with the submission file
+4. Merge 
 5. Leaderboard updated within 24 hours :https://noormajdoub.github.io/Challenge/ 
 
 Good luck, and may the best aggregation strategy win! 
